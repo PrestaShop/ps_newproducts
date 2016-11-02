@@ -25,10 +25,11 @@
 
 <section>
   <h1>{l s='New products' d='Modules.Newproducts.Shop'}</h1>
-  <div>
+  <div class="products">
     {foreach from=$products item="product"}
       {include file="catalog/_partials/miniatures/product.tpl" product=$product}
     {/foreach}
   </div>
+  <a href="{$allNewProductsLink}">{l s='All new products' d='Modules.Newproducts.Shop'}</a>
 </section>
 
