@@ -221,10 +221,6 @@ class Ps_NewProducts extends Module implements WidgetInterface
 
     protected function getNewProducts()
     {
-        if (Configuration::get('PS_CATALOG_MODE')) {
-            return false;
-        }
-
         $newProducts = false;
 
         if (Configuration::get('PS_NB_DAYS_NEW_PRODUCT')) {
