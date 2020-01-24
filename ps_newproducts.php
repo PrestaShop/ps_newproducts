@@ -196,10 +196,6 @@ class Ps_NewProducts extends Module implements WidgetInterface
         if (!$this->isCached($this->templateFile, $this->getCacheId('ps_newproducts'))) {
             $variables = $this->getWidgetVariables($hookName, $configuration);
 
-            if (empty($variables)) {
-                return false;
-            }
-
             $this->smarty->assign($variables);
         }
 
