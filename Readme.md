@@ -2,7 +2,7 @@
 
 ## About
 
-Displays a block featuring your store's newest products.
+Highlight your store's newest products, display a block on the homepage and let the visitors know about your latest news.
 
 ## Multistore compatibility
 
