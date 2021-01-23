@@ -111,7 +111,7 @@ class Ps_NewProducts extends Module implements WidgetInterface
 
             $productNbr = Tools::getValue('NEW_PRODUCTS_NBR');
 
-            if (!$productNbr || empty($productNbr)) {
+            if (empty($productNbr)) {
                 $output .= $this->displayError(
                     $this->trans('Please complete the "products to display" field.', array(), 'Modules.Newproducts.Admin' )
                 );
