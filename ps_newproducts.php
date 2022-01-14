@@ -41,6 +41,7 @@ class Ps_NewProducts extends Module implements WidgetInterface
     public function __construct()
     {
         $this->name = 'ps_newproducts';
+        $this->tab = 'front_office_features';
         $this->author = 'PrestaShop';
         $this->version = '1.0.1';
         $this->need_instance = 0;
