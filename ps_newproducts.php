@@ -110,12 +110,13 @@ class Ps_NewProducts extends Module implements WidgetInterface
         $output = '';
         if (Tools::isSubmit('submitBlockNewProducts')) {
             $productNbr = Tools::getValue('NEW_PRODUCTS_NBR');
+            $productNbDays = Tools::getValue('PS_NB_DAYS_NEW_PRODUCT');
 
             if (!$productNbr || empty($productNbr)) {
                 $output .= $this->displayError(
                     $this->trans('Please complete the "products to display" field.', [], 'Modules.Newproducts.Admin')
                 );
-            } elseif (0 === (int) $productNbr) {
+            } elseif (0 === (int) $productNbr || 0 === (int)$productNbDay) {
                 $output .= $this->displayError(
                     $this->trans('Invalid number.', [], 'Modules.Newproducts.Admin')
                 );
