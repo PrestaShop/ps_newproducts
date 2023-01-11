@@ -2,7 +2,14 @@
 
 ## About
 
-Displays a block featuring your store's newest products.
+Highlight your store's newest products, display a block on the homepage and let the visitors know about your latest news.
+
+## Multistore compatibility
+
+This module is compatible with the multistore :heavy_check_mark: <br/>
+It can be configured differently from one store to another.<br/>
+It can be configured quickly in the same way on all stores thanks to the all shops context or the group of shops.<br/>
+It can be activated on one store and deactivated on another
 
 ## Contributing
 
