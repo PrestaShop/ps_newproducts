@@ -42,7 +42,7 @@ class Ps_NewProducts extends Module implements WidgetInterface
         $this->name = 'ps_newproducts';
         $this->tab = 'front_office_features';
         $this->author = 'PrestaShop';
-        $this->version = '1.0.3';
+        $this->version = '1.0.4';
         $this->need_instance = 0;
 
         $this->ps_versions_compliancy = [
