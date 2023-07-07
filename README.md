@@ -4,6 +4,10 @@
 
 Highlight your store's newest products, display a block on the homepage and let the visitors know about your latest news.
 
+## Compatibility
+
+PrestaShop: `1.7.0.0` or later
+
 ## Multistore compatibility
 
 This module is compatible with the multistore :heavy_check_mark: <br/>
