@@ -6,7 +6,7 @@ Highlight your store's newest products, display a block on the homepage and let 
 
 ## Compatibility
 
-PrestaShop: `1.7.0.0` or later
+PrestaShop: `1.7.0.0` or `8.x`
 
 ## Multistore compatibility
 
