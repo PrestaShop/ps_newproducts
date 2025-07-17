@@ -2,7 +2,7 @@
 <module>
     <name>ps_newproducts</name>
     <displayName><![CDATA[New products]]></displayName>
-    <version><![CDATA[1.0.4]]></version>
+    <version><![CDATA[1.0.5]]></version>
     <description><![CDATA[Displays a block featuring your store's newest products.]]></description>
     <author><![CDATA[PrestaShop]]></author>
     <is_configurable>1</is_configurable>
