@@ -182,7 +182,7 @@ class Ps_NewProducts extends Module implements WidgetInterface
         if (empty(Configuration::get('PS_NB_DAYS_NEW_PRODUCT'))) {
             return [];
         }
-        
+
         $newProducts = Product::getNewProducts(
             (int) $this->context->language->id,
             0,
