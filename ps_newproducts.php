@@ -42,7 +42,7 @@ class Ps_NewProducts extends Module implements WidgetInterface
         $this->name = 'ps_newproducts';
         $this->tab = 'front_office_features';
         $this->author = 'PrestaShop';
-        $this->version = '1.0.5';
+        $this->version = '2.0.0';
         $this->need_instance = 0;
 
         $this->ps_versions_compliancy = [
@@ -61,47 +61,20 @@ class Ps_NewProducts extends Module implements WidgetInterface
 
     public function install()
     {
-        $this->_clearCache('*');
-
         return parent::install()
             && Configuration::updateValue('NEW_PRODUCTS_NBR', 8)
-            && $this->registerHook('actionProductAdd')
-            && $this->registerHook('actionProductUpdate')
-            && $this->registerHook('actionProductDelete')
             && $this->registerHook('displayHome')
         ;
     }
 
     public function uninstall()
     {
-        $this->_clearCache('*');
-
         if (!parent::uninstall() ||
             !Configuration::deleteByName('NEW_PRODUCTS_NBR')) {
             return false;
         }
 
         return true;
-    }
-
-    public function hookActionProductAdd($params)
-    {
-        $this->_clearCache('*');
-    }
-
-    public function hookActionProductUpdate($params)
-    {
-        $this->_clearCache('*');
-    }
-
-    public function hookActionProductDelete($params)
-    {
-        $this->_clearCache('*');
-    }
-
-    public function _clearCache($template, $cache_id = null, $compile_id = null)
-    {
-        parent::_clearCache($this->templateFile);
     }
 
     public function getContent()
@@ -122,8 +95,6 @@ class Ps_NewProducts extends Module implements WidgetInterface
             } else {
                 Configuration::updateValue('PS_NB_DAYS_NEW_PRODUCT', (int) Tools::getValue('PS_NB_DAYS_NEW_PRODUCT'));
                 Configuration::updateValue('NEW_PRODUCTS_NBR', (int) $productNbr);
-
-                $this->_clearCache('*');
 
                 $output .= $this->displayConfirmation($this->trans('The settings have been updated.', [], 'Admin.Notifications.Success'));
             }
@@ -194,17 +165,15 @@ class Ps_NewProducts extends Module implements WidgetInterface
 
     public function renderWidget($hookName, array $configuration)
     {
-        if (!$this->isCached($this->templateFile, $this->getCacheId('ps_newproducts'))) {
-            $variables = $this->getWidgetVariables($hookName, $configuration);
+        $variables = $this->getWidgetVariables($hookName, $configuration);
 
-            if (empty($variables)) {
-                return false;
-            }
-
-            $this->smarty->assign($variables);
+        if (empty($variables)) {
+            return false;
         }
 
-        return $this->fetch($this->templateFile, $this->getCacheId('ps_newproducts'));
+        $this->smarty->assign($variables);
+
+        return $this->fetch($this->templateFile);
     }
 
     public function getWidgetVariables($hookName, array $configuration)
