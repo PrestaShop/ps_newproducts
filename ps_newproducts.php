@@ -46,7 +46,7 @@ class Ps_NewProducts extends Module implements WidgetInterface
         $this->need_instance = 0;
 
         $this->ps_versions_compliancy = [
-            'min' => '1.7.0.0',
+            'min' => '1.7.4.0',
             'max' => _PS_VERSION_,
         ];
 
@@ -82,18 +82,12 @@ class Ps_NewProducts extends Module implements WidgetInterface
         $output = '';
         if (Tools::isSubmit('submitBlockNewProducts')) {
             $productNbr = Tools::getValue('NEW_PRODUCTS_NBR');
-            $productNbDays = Tools::getValue('PS_NB_DAYS_NEW_PRODUCT');
 
-            if (!$productNbr || empty($productNbr)) {
+            if (empty($productNbr)) {
                 $output .= $this->displayError(
                     $this->trans('Please complete the "products to display" field.', [], 'Modules.Newproducts.Admin')
                 );
-            } elseif (0 === (int) $productNbr || 0 === (int) $productNbDays) {
-                $output .= $this->displayError(
-                    $this->trans('Invalid number.', [], 'Modules.Newproducts.Admin')
-                );
             } else {
-                Configuration::updateValue('PS_NB_DAYS_NEW_PRODUCT', (int) Tools::getValue('PS_NB_DAYS_NEW_PRODUCT'));
                 Configuration::updateValue('NEW_PRODUCTS_NBR', (int) $productNbr);
 
                 $output .= $this->displayConfirmation($this->trans('The settings have been updated.', [], 'Admin.Notifications.Success'));
@@ -118,12 +112,6 @@ class Ps_NewProducts extends Module implements WidgetInterface
                         'name' => 'NEW_PRODUCTS_NBR',
                         'class' => 'fixed-width-xs',
                         'desc' => $this->trans('Define the number of products to be displayed in this block.', [], 'Modules.Newproducts.Admin'),
-                    ],
-                    [
-                        'type' => 'text',
-                        'label' => $this->trans('Number of days for which the product is considered \'new\'', [], 'Modules.Newproducts.Admin'),
-                        'name' => 'PS_NB_DAYS_NEW_PRODUCT',
-                        'class' => 'fixed-width-xs',
                     ],
                 ],
                 'submit' => [
@@ -158,7 +146,6 @@ class Ps_NewProducts extends Module implements WidgetInterface
     public function getConfigFieldsValues()
     {
         return [
-            'PS_NB_DAYS_NEW_PRODUCT' => Tools::getValue('PS_NB_DAYS_NEW_PRODUCT', Configuration::get('PS_NB_DAYS_NEW_PRODUCT')),
             'NEW_PRODUCTS_NBR' => Tools::getValue('NEW_PRODUCTS_NBR', Configuration::get('NEW_PRODUCTS_NBR')),
         ];
     }
@@ -192,18 +179,17 @@ class Ps_NewProducts extends Module implements WidgetInterface
 
     protected function getNewProducts()
     {
-        $newProducts = false;
-
-        if (Configuration::get('PS_NB_DAYS_NEW_PRODUCT')) {
-            $newProducts = Product::getNewProducts(
-                (int) $this->context->language->id,
-                0,
-                (int) Configuration::get('NEW_PRODUCTS_NBR')
-            );
+        if (empty(Configuration::get('PS_NB_DAYS_NEW_PRODUCT'))) {
+            return [];
         }
 
-        $assembler = new ProductAssembler($this->context);
+        $newProducts = Product::getNewProducts(
+            (int) $this->context->language->id,
+            0,
+            (int) Configuration::get('NEW_PRODUCTS_NBR')
+        );
 
+        $assembler = new ProductAssembler($this->context);
         $presenterFactory = new ProductPresenterFactory($this->context);
         $presentationSettings = $presenterFactory->getPresentationSettings();
         if (version_compare(_PS_VERSION_, '1.7.5', '>=')) {
