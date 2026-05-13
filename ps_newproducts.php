@@ -87,6 +87,10 @@ class Ps_NewProducts extends Module implements WidgetInterface
                 $output .= $this->displayError(
                     $this->trans('Please complete the "products to display" field.', [], 'Modules.Newproducts.Admin')
                 );
+            } elseif ((int) $productNbr === 0) {
+                $output .= $this->displayError(
+                    $this->trans('Invalid number.', [], 'Modules.Newproducts.Admin')
+                );
             } else {
                 Configuration::updateValue('NEW_PRODUCTS_NBR', (int) $productNbr);
 
