@@ -42,7 +42,7 @@ class Ps_NewProducts extends Module implements WidgetInterface
         $this->name = 'ps_newproducts';
         $this->tab = 'front_office_features';
         $this->author = 'PrestaShop';
-        $this->version = '2.0.0';
+        $this->version = '2.0.1';
         $this->need_instance = 0;
 
         $this->ps_versions_compliancy = [
@@ -86,6 +86,10 @@ class Ps_NewProducts extends Module implements WidgetInterface
             if (empty($productNbr)) {
                 $output .= $this->displayError(
                     $this->trans('Please complete the "products to display" field.', [], 'Modules.Newproducts.Admin')
+                );
+            } elseif ((int) $productNbr === 0) {
+                $output .= $this->displayError(
+                    $this->trans('Invalid number.', [], 'Modules.Newproducts.Admin')
                 );
             } else {
                 Configuration::updateValue('NEW_PRODUCTS_NBR', (int) $productNbr);
