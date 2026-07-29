@@ -87,7 +87,7 @@ class Ps_NewProducts extends Module implements WidgetInterface
                 $output .= $this->displayError(
                     $this->trans('Please complete the "products to display" field.', [], 'Modules.Newproducts.Admin')
                 );
-            } elseif ((int) $productNbr === 0) {
+            } elseif (!Validate::isUnsignedInt($productNbr)) {
                 $output .= $this->displayError(
                     $this->trans('Invalid number.', [], 'Modules.Newproducts.Admin')
                 );
